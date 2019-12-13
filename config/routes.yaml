@@ -1,3 +1,4 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
+domains:
+  resource: 'routes/product.yaml'
+main:
+  resource: 'routes/main.yaml'
