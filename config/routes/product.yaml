@@ -1,0 +1,3 @@
+product:
+  path: /product
+  controller: App\Product\Infrastructure\ProductController::index

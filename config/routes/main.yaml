@@ -1,0 +1,4 @@
+homepage:
+  path: /
+  controller: App\MainController\HomeController::index
+
