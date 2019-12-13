@@ -13,7 +13,9 @@ This is example shop application, based od Symfony 4.4 version. //TODO
  - [ ] API infrastructure
  - [ ] Product commands:
     - [ ] Admin middleware
-    - [ ] Product details
+    - [x] Product details
+    - [ ] Product Money/Money support
+    - [ ] Product Currencies support
     - [ ] Insert new product based on form symfony component
     - [ ] Pagination module
     - [ ] Listing and paginate products

@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Product\Application\Query;
+declare(strict_types=1);
 
+namespace App\Product\Application\Query;
 
 interface ProductQuery
 {

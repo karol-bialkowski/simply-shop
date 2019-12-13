@@ -2,7 +2,14 @@
 
 namespace App\Product\Domain;
 
+use App\Product\Domain\ValueObject\ProductDescription;
+use App\Product\Domain\ValueObject\ProductName;
 use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * TODO: Remove declaration Doctrine columns from this model.
+ * TODO: The model should not know that later something creates a new database row of this object.
+ */
 
 /**
  * @ORM\Entity()
@@ -20,27 +27,40 @@ class Product
     /**
      * @ORM\Column(type="string", length=255, nullable=false)
      */
-    private $name;
-
-
-    public function __construct(string $name)
-    {
-        $this->name = $name;
-    }
+    private string $name;
+    public const NAME_MAX_LENGTH = 255; //TODO: refactor these options to one declaration
+    public const NAME_MIN_LENGTH = 1;
 
     /**
-     * @return string
+     * @ORM\Column(type="string", length=255, nullable=false)
      */
-    public function getName(): string
-    {
-        return $this->name;
-    }
+    private string $description;
+    public const DESCRIPTION_MAX_LENGTH = 255;
+    public const DESCRIPTION_MIN_LENGTH = 100;
 
     /**
-     * @param string $name
+     * @ORM\Column(type="integer", nullable=false, options={"unsigned"=true})
+     * //     * @ORM\Embedded(class="\Money\Money") TODO
      */
-    public function setName(string $name): void
+    private int $price;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $created_at;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $updated_at;
+
+
+    public function __construct(ProductName $name, ProductDescription $description, int $price)
     {
         $this->name = $name;
+        $this->description = $description;
+        $this->price = $price;
+        $this->created_at = new \DateTime('now');
+        $this->updated_at = null;
     }
 }

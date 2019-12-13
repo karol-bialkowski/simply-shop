@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Product\Infrastructure\Doctrine\Dbal;
 
 use App\Product\Application\Query\ProductQuery;

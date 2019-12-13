@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Product\Infrastructure\Doctrine\ORM;
+declare(strict_types=1);
 
+namespace App\Product\Infrastructure\Doctrine\ORM;
 
 use App\Product\Domain\Product;
 use Doctrine\ORM\EntityManagerInterface;

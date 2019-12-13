@@ -1,6 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Product\Application\Query;
+
+use App\Product\Domain\ValueObject\ProductDescription;
+use App\Product\Domain\ValueObject\ProductName;
 
 final class ProductView
 {
@@ -8,17 +13,30 @@ final class ProductView
      * @var string
      */
     private $name;
+    /**
+     * @var ProductDescription
+     */
+    private ProductDescription $description;
 
-    public function __construct(string $name)
+    public function __construct(ProductName $name, ProductDescription $description)
     {
         $this->name = $name;
+        $this->description = $description;
     }
 
     /**
-     * @return string
+     * @return ProductName
      */
-    public function name(): string
+    public function name(): ProductName
     {
         return $this->name;
+    }
+
+    /**
+     * @return ProductDescription
+     */
+    public function description(): ProductDescription
+    {
+        return $this->description;
     }
 }

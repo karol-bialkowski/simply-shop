@@ -1,8 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Product\Application\Command\Handler;
 
 use App\Product\Application\Command\CreateNewProduct;
+use App\Product\Domain\ValueObject\ProductDescription;
+use App\Product\Domain\ValueObject\ProductName;
 use App\Product\Infrastructure\Doctrine\ORM\DoctrineProducts;
 use App\Product\Domain\Product;
 use Doctrine\ORM\EntityManagerInterface;
@@ -37,7 +41,9 @@ class CreateNewProductHandler implements MessageHandlerInterface
     public function __invoke(CreateNewProduct $createNewProduct): void
     {
         $product = new Product(
-            $createNewProduct->name()
+            new ProductName($createNewProduct->name()),
+            new ProductDescription($createNewProduct->description()),
+            $createNewProduct->price()
         );
 
         $this->products->add($product);
