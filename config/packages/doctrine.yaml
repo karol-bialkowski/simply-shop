@@ -18,5 +18,5 @@ doctrine:
         alias: App
       Product\Domain\Product:
         type: annotation
-        dir: '%kernel.project_dir%/src/Product/Model'
+        dir: '%kernel.project_dir%/src/Product/Domain'
         prefix: 'App\Product\Domain'

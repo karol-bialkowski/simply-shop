@@ -16,6 +16,10 @@ class ProductController extends BaseController
         $command = new CreateNewProduct('Ksiazka');
         $this->handleMessage($command);
 
+//        $second_command = $this->productQuery->getById(2);
+//
+//        echo '##'.$second_command->name().'##';
+
         return new Response('Produkt');
     }
 

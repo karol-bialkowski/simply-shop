@@ -3,25 +3,12 @@
 namespace App\Product\Application\Query;
 
 
-class ProductQuery
+interface ProductQuery
 {
 
-    /**
-     * @var string
-     */
-    private $id;
+    public function count(): int;
 
-    public function __construct(string $id)
-    {
-        $this->id = $id;
-    }
+    public function getById(int $id): ProductView;
 
-    /**
-     * @return string
-     */
-    public function getId(): string
-    {
-        return $this->id;
-    }
-
+    public function getAll();
 }

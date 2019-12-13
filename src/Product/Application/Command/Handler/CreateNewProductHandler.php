@@ -16,21 +16,31 @@ class CreateNewProductHandler implements MessageHandlerInterface
      */
     private $entityManager;
 
+    /**
+     * @var DoctrineProducts
+     */
+    private $products;
+
+    /**
+     * CreateNewProductHandler constructor.
+     * @param EntityManagerInterface $entityManager
+     */
     public function __construct(EntityManagerInterface $entityManager)
     {
         $this->entityManager = $entityManager;
+        $this->products = new DoctrineProducts($this->entityManager); //TODO: refactor this to more sexy
     }
 
-    public function __invoke(CreateNewProduct $createNewProduct)
+    /**
+     * @param CreateNewProduct $createNewProduct
+     */
+    public function __invoke(CreateNewProduct $createNewProduct): void
     {
         $product = new Product(
             $createNewProduct->name()
         );
 
-        $doctrineProducts = new DoctrineProducts($this->entityManager);
-        $doctrineProducts->add($product);
-
-        echo 'saving now...';
+        $this->products->add($product);
     }
 
 }

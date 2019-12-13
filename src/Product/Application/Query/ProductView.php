@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Product\Application\Command;
+namespace App\Product\Application\Query;
 
-class CreateNewProduct
+final class ProductView
 {
-
     /**
      * @var string
      */
@@ -18,9 +17,8 @@ class CreateNewProduct
     /**
      * @return string
      */
-    public function name()
+    public function name(): string
     {
         return $this->name;
     }
-
 }
