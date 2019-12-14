@@ -11,16 +11,16 @@ This is example shop application, based od Symfony 4.4 version. //TODO
  - [x] User model, auth
  - [ ] JWT to auth api requests
  - [ ] API infrastructure
- - [ ] Product commands:
-    - [] Admin middleware
+ - [x] Product commands:
+    - [x] Admin middleware
     - [x] Product details
     - [x] Product Money/Money support
     - [x] Product Currencies support
     - [x] Insert new product based on form symfony component
     - [x] Pagination module
     - [x] Listing and paginate products
-    - [ ] mailer
- - [ ] Cache
+    - [x] mailer ( not finish )
+ - [ ] Cache redis
     
 
 Powered by Karol Bialkowski. E-mail: spam@bialkowskikarol.pl
