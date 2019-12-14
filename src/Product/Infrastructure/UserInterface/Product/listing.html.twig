@@ -1,0 +1,21 @@
+{% extends '@main/base.html.twig' %}
+
+{% block body %}
+
+    <article class="container">
+        <h1 class="mt-4">Listing latest products</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem ipsam laudantium nobis. Molestiae possimus
+            quibusdam voluptatem. Ab beatae cum eligendi ipsam, necessitatibus nesciunt officiis perspiciatis provident
+            tempora tenetur ut vitae?</p>
+
+        <div class="navigation">
+            {{ knp_pagination_render(products) }}
+        </div>
+
+        {% for product in products %}
+            {% include '@main/Product/product.html.twig' with product %}
+        {% endfor %}
+
+    </article>
+
+{% endblock %}

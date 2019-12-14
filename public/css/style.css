@@ -1,0 +1,28 @@
+/* TODO: move this to sass, encore/npm/whatever better than standard css  */
+
+.pagination {
+    justify-content: center;
+    margin: 20px 0;
+    font-size: 11px;
+}
+
+.pagination .current, .pagination a {
+    padding: 5px;
+    border: 1px solid #e4e2e2;
+    width: 40px;
+    text-align: center;
+    display: inline-block;
+    transition: all 300ms;
+    margin: 10px;
+}
+
+.pagination .current:hover, .pagination a:hover {
+    background-color: #dddbdb;
+    text-decoration: none;
+}
+
+.product article {
+    font-size: 12px;
+    font-family: Lato, Arial;
+    margin-top: 10px;
+}

@@ -17,9 +17,10 @@ This is example shop application, based od Symfony 4.4 version. //TODO
     - [ ] Product Money/Money support
     - [ ] Product Currencies support
     - [x] Insert new product based on form symfony component
-    - [ ] Pagination module
-    - [ ] Listing and paginate products
+    - [x] Pagination module
+    - [x] Listing and paginate products
     - [ ] mailer
+ - [ ] Cache
  - [ ] TODO of TODO :-)
     
 

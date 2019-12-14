@@ -1,6 +1,9 @@
+listing:
+  path: /products
+  controller: App\Product\Infrastructure\ProductController::index
 new_product:
   path: /admin/new-product
-  controller: App\Product\Infrastructure\ProductController::index
+  controller: App\Product\Infrastructure\ProductController::insert
 create_product:
   path: /admin/product/store
   controller: App\Product\Infrastructure\ProductController::store
