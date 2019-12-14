@@ -20,6 +20,6 @@ class ProductException extends \InvalidArgumentException
 
     public static function wrongProductPrice()
     {
-        return new self(sprintf('Product price must be greater than 0'));
+        return new self(sprintf('Product price must be greater than 0 or price is too big.'));
     }
 }

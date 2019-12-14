@@ -66,6 +66,7 @@ class CreateNewProductForm implements CreateNewProductFormInterface
                 ]
             ])
             ->add('description', TextType::class)
+            ->add('price', TextType::class)
             ->getForm();
     }
 

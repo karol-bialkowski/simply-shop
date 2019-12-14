@@ -1,0 +1,19 @@
+{% extends '@main/base.html.twig' %}
+
+{% block body %}
+
+    <article class="container">
+
+        <a href="javascript:window.history.back()" class="btn btn-sm btn-danger"><< Back</a>
+
+
+        <h1 class="mt-4">{{ product.name }} <span class="badge badge-secondary">{{  product.price('PLN') }}</span> </h1>
+        <small>Other currencies: <strong>{{  product.price('EUR') }}</strong>, <strong>{{  product.price('USD') }}</strong></small>
+        <br><br>
+        <p class="description">{{ product.description }}</p>
+
+        <hr />
+
+    </article>
+
+{% endblock %}

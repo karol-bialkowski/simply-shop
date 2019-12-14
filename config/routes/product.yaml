@@ -7,3 +7,8 @@ new_product:
 create_product:
   path: /admin/product/store
   controller: App\Product\Infrastructure\ProductController::store
+product:
+  path: /product/{id}
+  controller: App\Product\Infrastructure\ProductController::product
+  requirements:
+    id: '\d+'

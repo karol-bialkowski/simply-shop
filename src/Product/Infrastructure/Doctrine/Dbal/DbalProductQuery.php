@@ -6,6 +6,8 @@ namespace App\Product\Infrastructure\Doctrine\Dbal;
 
 use App\Product\Application\Query\ProductQuery;
 use App\Product\Application\Query\ProductView;
+use App\Product\Domain\ValueObject\ProductDescription;
+use App\Product\Domain\ValueObject\ProductName;
 use Doctrine\DBAL\Connection;
 
 final class DbalProductQuery implements ProductQuery
@@ -26,17 +28,38 @@ final class DbalProductQuery implements ProductQuery
         // TODO: Implement count() method.
     }
 
+    public function getByName(string $name): ProductView
+    {
+        $queryBuilder = $this->connection->createQueryBuilder();
+        $queryBuilder->select('p.name', 'p.id', 'p.description', 'p.price')
+            ->from('product', 'p')
+            ->where('p.id = :productName')
+            ->setParameter('productName', $name);
+
+        $productData = $this->connection->fetchAssoc($queryBuilder->getSQL(), $queryBuilder->getParameters());
+
+        return new ProductView(
+            new ProductName($productData['name']),
+            new ProductDescription($productData['description']),
+            (int) $productData['price']
+        );
+    }
+
     public function getById(int $id): ProductView
     {
         $queryBuilder = $this->connection->createQueryBuilder();
-        $queryBuilder->select('p.name', 'p.id')
+        $queryBuilder->select('p.name', 'p.id', 'p.description', 'p.price')
             ->from('product', 'p')
             ->where('p.id = :productId')
             ->setParameter('productId', $id);
 
         $productData = $this->connection->fetchAssoc($queryBuilder->getSQL(), $queryBuilder->getParameters());
 
-        return new ProductView($productData['name']);
+        return new ProductView(
+            new ProductName($productData['name']),
+            new ProductDescription($productData['description']),
+            (int) $productData['price']
+        );
 
     }
 

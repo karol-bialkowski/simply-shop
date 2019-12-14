@@ -2,5 +2,8 @@
 
     <header>{{ product.name }}, <small>added {{ product.created_at }}, #{{ product.id }}</small></header>
     <article>{{ product.description }}</article>
+    <br>
+    <a href="{{ path('product',  {'id': product.id}) }}" class="btn btn-sm btn-danger">Show price and details >></a>
+
 </div>
 <hr/>

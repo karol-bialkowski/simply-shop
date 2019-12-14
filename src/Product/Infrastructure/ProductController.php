@@ -8,13 +8,19 @@ use App\Product\Application\Command\CreateNewProduct;
 use App\Product\Domain\Exception\ProductException;
 use App\Product\Domain\Form\CreateNewProductForm;
 use Knp\Component\Pager\PaginatorInterface;
-use Symfony\Component\HttpFoundation\RedirectResponse;
+use Money\Currencies\ISOCurrencies;
+use Money\Parser\DecimalMoneyParser;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class ProductController extends BaseController
 {
 
+    /**
+     * @param PaginatorInterface $paginator
+     * @param Request $request
+     * @return Response
+     */
     public function index(PaginatorInterface $paginator, Request $request)
     {
         $products = $this->productQuery->getAll();
@@ -37,6 +43,10 @@ class ProductController extends BaseController
         return $this->render('@main\Product\insert.html.twig', ['form' => $form->createView()]);
     }
 
+    /**
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+     */
     public function store(Request $request)
     {
 
@@ -46,13 +56,18 @@ class ProductController extends BaseController
             return new Response('Access denied!', 403);
         }
 
+        $requestFormData = $request->request->get('form');
+        
         try {
 
-            $requestFormData = $request->request->get('form');
+            $currencies = new ISOCurrencies();
+            $moneyParser = new DecimalMoneyParser($currencies);
+            $money = $moneyParser->parse($requestFormData['price'], 'PLN');
             $command = new CreateNewProduct(
-                $requestFormData['name'], $requestFormData['description'], 100
+                $requestFormData['name'], $requestFormData['description'], (int)$money->getAmount()
             );
             $this->handleMessage($command);
+
             $this->addFlash('success', 'Product created.');
         } catch (ProductException $exception) {
             $this->addFlash('danger', $exception->getMessage());
@@ -61,6 +76,14 @@ class ProductController extends BaseController
         }
 
         return $this->redirectToRoute('new_product');
+    }
+
+    public function product(int $id)
+    {
+        $product = $this->productQuery->getById($id);
+        return $this->render('@main\Product\specific_product.html.twig', [
+            'product' => $product
+        ]);
     }
 
 }

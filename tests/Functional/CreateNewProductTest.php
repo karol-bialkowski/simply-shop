@@ -20,15 +20,15 @@ class CreateNewProductTest extends WebTestCase
         $this->faker = Factory::create();
     }
 
-//    public function testShouldCorrectCreateProductViaAPI()
-//    {
-//        //tmp disabled
-////        $client = static::createClient();
-////        $client->request('GET', '/product');
-////        $content = json_decode($client->getResponse()->getContent());
-////
-////        $this->assertTrue($content->status);
-////        $this->assertEquals(200, $client->getResponse()->getStatusCode());
-//    }
+    public function testShouldCorrectCreateProductViaAPI()
+    {
+        //tmp disabled
+//        $client = static::createClient();
+//        $client->request('GET', '/product');
+//        $content = json_decode($client->getResponse()->getContent());
+//
+//        $this->assertTrue($content->status);
+//        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+    }
 
 }

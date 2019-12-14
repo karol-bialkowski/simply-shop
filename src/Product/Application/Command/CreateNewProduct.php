@@ -28,7 +28,7 @@ class CreateNewProduct
             throw ProductException::wrongProductDescription();
         }
 
-        if ($price === 0 || $price > 1000000) {
+        if ($price === 0 || $price > 99999990) {
             throw ProductException::wrongProductPrice();
         }
 
