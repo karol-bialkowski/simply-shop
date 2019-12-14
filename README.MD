@@ -8,11 +8,11 @@ This is example shop application, based od Symfony 4.4 version. //TODO
 # Todo
  - [ ] Readme, documentation
     - [ ] swagger docs
- - [ ] User model, auth
+ - [x] User model, auth
  - [ ] JWT to auth api requests
  - [ ] API infrastructure
  - [ ] Product commands:
-    - [ ] Admin middleware
+    - [] Admin middleware
     - [x] Product details
     - [x] Product Money/Money support
     - [x] Product Currencies support
