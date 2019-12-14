@@ -6,7 +6,7 @@ This is example shop application, based od Symfony 4.4 version. //TODO
   - Run app by one docker command!
 
 # Todo
- - [ ] Readme, documentation
+ - [x] Readme, documentation
     - [ ] swagger docs
  - [x] User model, auth
  - [ ] JWT to auth api requests
