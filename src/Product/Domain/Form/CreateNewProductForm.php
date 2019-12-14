@@ -34,10 +34,17 @@ class CreateNewProductForm implements CreateNewProductFormInterface
 
     public function __construct(string $action_url)
     {
+        //TODO: remove this after moved csrf verification to middleware
+//        $session = new Session();
+//        $csrfGenerator = new UriSafeTokenGenerator();
+//        $csrfStorage = new SessionTokenStorage($session);
+//        $csrfManager = new CsrfTokenManager($csrfGenerator, $csrfStorage);
+
         $this->action_url = $action_url;
         $this->validator = Validation::createValidator();
         $this->formFactory = Forms::createFormFactoryBuilder()
             ->addExtension(new HttpFoundationExtension())
+//            ->addExtension(new CsrfExtension($csrfManager)) //TODO: as below
             ->addExtension(new ValidatorExtension($this->validator))
             ->getFormFactory();
     }

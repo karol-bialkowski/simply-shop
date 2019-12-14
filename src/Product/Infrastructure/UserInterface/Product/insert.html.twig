@@ -24,6 +24,8 @@
             <button type="submit" class="btn btn-outline-info">Add new product</button>
         </div>
 
+        <input type="hidden" name="token" value="{{ csrf_token('createProduct') }}"/>
+
         {{ form_end(form) }}
 
 

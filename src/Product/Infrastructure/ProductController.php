@@ -27,12 +27,15 @@ class ProductController extends BaseController
         return $this->render('@main\Product\insert.html.twig', ['form' => $form->createView()]);
     }
 
-    /**
-     * @param Request $request
-     * @return RedirectResponse
-     */
-    public function store(Request $request): RedirectResponse
+
+    public function store(Request $request)
     {
+
+        //TODO: move this to middleware or verify by $form
+        $submittedToken = $request->request->get('token');
+        if (!$this->isCsrfTokenValid('createProduct', $submittedToken)) {
+            return new Response('Access denied!', 403);
+        }
 
         try {
 
