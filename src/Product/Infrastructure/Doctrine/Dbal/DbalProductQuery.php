@@ -40,7 +40,13 @@ final class DbalProductQuery implements ProductQuery
 
     }
 
-    public function getAll()
+    public function getAll(): array
     {
+        $queryBuilder = $this->connection->createQueryBuilder();
+        $queryBuilder->select('p.name', 'p.id', 'p.description', 'p.price', 'p.created_at')
+            ->from('product', 'p')
+            ->orderBy('p.id', 'DESC');
+
+        return $this->connection->fetchAll($queryBuilder->getSQL(), $queryBuilder->getParameters());
     }
 }

@@ -9,6 +9,7 @@
     "ext-ctype": "*",
     "ext-iconv": "*",
     "fzaninotto/faker": "^1.9",
+    "knplabs/knp-paginator-bundle": "^5.0",
     "moneyphp/money": "^3.2",
     "symfony/console": "*",
     "symfony/dotenv": "*",
