@@ -1,0 +1,32 @@
+{% extends '@main/base.html.twig' %}
+
+{% block body %}
+
+    <article class="container">
+        <h1 class="mt-4">Create new product</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem ipsam laudantium nobis. Molestiae possimus
+            quibusdam voluptatem. Ab beatae cum eligendi ipsam, necessitatibus nesciunt officiis perspiciatis provident
+            tempora tenetur ut vitae?</p>
+
+        {{ form_start(form) }}
+
+        <div class="form-group">
+            {{ form_label(form.name, 'Product name') }}
+            {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+        </div>
+
+        <div class="form-group">
+            {{ form_label(form.description, 'Product description') }}
+            {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-outline-info">Add new product</button>
+        </div>
+
+        {{ form_end(form) }}
+
+
+    </article>
+
+{% endblock %}

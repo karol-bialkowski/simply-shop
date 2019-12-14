@@ -6,47 +6,49 @@ namespace App\Product\Infrastructure;
 
 use App\Product\Application\Command\CreateNewProduct;
 use App\Product\Domain\Exception\ProductException;
-use Symfony\Component\HttpFoundation\JsonResponse;
+use App\Product\Domain\Form\CreateNewProductForm;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class ProductController extends BaseController
 {
 
     /**
-     * @return JsonResponse
+     * @return Response
      */
-    public function index(): JsonResponse
+    public function index(): Response
+    {
+
+        //TODO: move this url to CreateNewProductForm, inject as service
+        $createNewProductUrl = $this->generateUrl('create_product');
+        $form = (new CreateNewProductForm($createNewProductUrl))->form();
+
+        return $this->render('@main\Product\insert.html.twig', ['form' => $form->createView()]);
+    }
+
+    /**
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function store(Request $request): RedirectResponse
     {
 
         try {
+
+            $requestFormData = $request->request->get('form');
             $command = new CreateNewProduct(
-                'Ksiazka', 'taki fajny hgsdasdasd
-                asdasdasdasasasasasasasasasasasasaasdasdasdasdasdasdasdasdasd
-                sdasddfsdfsdfsdfsdfsdasdopis', 100
+                $requestFormData['name'], $requestFormData['description'], 100
             );
+            $this->handleMessage($command);
+            $this->addFlash('success', 'Product created.');
         } catch (ProductException $exception) {
-
-            return JsonResponse::create([
-                'status' => false,
-                'message' => $exception->getMessage()
-            ], 400);
-
+            $this->addFlash('danger', $exception->getMessage());
         } catch (\Exception $exception) {
-            return JsonResponse::create([
-                'status' => false,
-                'message' => 'Oops. This looks like a bug or feature. Send request to our support.'
-            ], 400);
+            $this->addFlash('danger', 'Oops. This looks like a bug or feature. Send request to our support.');
         }
 
-        //TODO: refactor JsonResponse to different class, DRY
-
-        $this->handleMessage($command);
-
-//        $second_command = $this->productQuery->getById(2);
-//        echo '##'.$second_command->name().'##';
-
-        return JsonResponse::create([
-            'status' => true,
-        ], 200);
+        return $this->redirectToRoute('new_product');
     }
 
 }

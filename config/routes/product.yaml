@@ -1,3 +1,6 @@
-product:
-  path: /product
+new_product:
+  path: /admin/new-product
   controller: App\Product\Infrastructure\ProductController::index
+create_product:
+  path: /admin/product/store
+  controller: App\Product\Infrastructure\ProductController::store
