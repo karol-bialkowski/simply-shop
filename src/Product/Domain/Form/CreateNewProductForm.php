@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Product\Domain\Form;
 
+use App\Product\Domain\Form\DataTransformer\ProductPriceDataTransformer;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\HttpFoundation\HttpFoundationExtension;
@@ -54,7 +55,7 @@ class CreateNewProductForm implements CreateNewProductFormInterface
      */
     public function form(): FormInterface
     {
-        return $this->formFactory->createBuilder(FormType::class, null, [
+        $form = $this->formFactory->createBuilder(FormType::class, null, [
             'action' => $this->action_url,
             'method' => 'POST',
             'attr' => ['id' => 'CreateNewProductForm']
@@ -66,8 +67,12 @@ class CreateNewProductForm implements CreateNewProductFormInterface
                 ]
             ])
             ->add('description', TextType::class)
-            ->add('price', TextType::class)
-            ->getForm();
+            ->add('price', TextType::class);
+
+        $form->get('price')
+            ->addModelTransformer(new ProductPriceDataTransformer());
+
+        return $form->getForm();
     }
 
 }

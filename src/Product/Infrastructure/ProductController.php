@@ -56,15 +56,14 @@ class ProductController extends BaseController
             return new Response('Access denied!', 403);
         }
 
-        $requestFormData = $request->request->get('form');
-        
-        try {
+        $createNewProductUrl = $this->generateUrl('create_product');
+        $form = (new CreateNewProductForm($createNewProductUrl))->form();
 
-            $currencies = new ISOCurrencies();
-            $moneyParser = new DecimalMoneyParser($currencies);
-            $money = $moneyParser->parse($requestFormData['price'], 'PLN');
+        $requestFormData = $form->handleRequest($request)->getData();
+
+        try {
             $command = new CreateNewProduct(
-                $requestFormData['name'], $requestFormData['description'], (int)$money->getAmount()
+                $requestFormData['name'], $requestFormData['description'], $requestFormData['price']
             );
             $this->handleMessage($command);
 

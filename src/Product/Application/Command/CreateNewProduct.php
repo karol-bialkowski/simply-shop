@@ -6,6 +6,8 @@ namespace App\Product\Application\Command;
 
 use App\Product\Domain\Exception\ProductException;
 use App\Product\Domain\Product;
+use Money\Currency;
+use Money\Money;
 
 class CreateNewProduct
 {
@@ -15,9 +17,9 @@ class CreateNewProduct
      */
     private string $name;
     private string $description;
-    private int $price;
+    private Money $price;
 
-    public function __construct(string $name, string $description, int $price)
+    public function __construct(string $name, string $description, Money $price)
     {
         //TODO: move validations to domain validation
         if (strlen($name) > Product::NAME_MAX_LENGTH || strlen($name) < Product::NAME_MIN_LENGTH) {
@@ -28,7 +30,7 @@ class CreateNewProduct
             throw ProductException::wrongProductDescription();
         }
 
-        if ($price === 0 || $price > 99999990) {
+        if ($price->isZero() || $price->greaterThan(new Money(99999990, new Currency('PLN')))) {
             throw ProductException::wrongProductPrice();
         }
 
@@ -56,7 +58,7 @@ class CreateNewProduct
     /**
      * @return int
      */
-    public function price(): int
+    public function price(): Money
     {
         return $this->price;
     }

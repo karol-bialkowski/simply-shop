@@ -7,6 +7,7 @@ namespace App\Product\Application\Command\Handler;
 use App\Product\Application\Command\CreateNewProduct;
 use App\Product\Domain\ValueObject\ProductDescription;
 use App\Product\Domain\ValueObject\ProductName;
+use App\Product\Domain\ValueObject\ProductPrice;
 use App\Product\Infrastructure\Doctrine\ORM\DoctrineProducts;
 use App\Product\Domain\Product;
 use Doctrine\ORM\EntityManagerInterface;
@@ -43,7 +44,7 @@ class CreateNewProductHandler implements MessageHandlerInterface
         $product = new Product(
             new ProductName($createNewProduct->name()),
             new ProductDescription($createNewProduct->description()),
-            $createNewProduct->price()
+            (new ProductPrice($createNewProduct->price()))->getProductPrice()
         );
 
         $this->products->add($product);
