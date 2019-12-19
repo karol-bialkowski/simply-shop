@@ -7,6 +7,8 @@ RUN apt-get update \
     zlib1g-dev libzip-dev \
     sudo
 
+RUN docker-php-ext-configure opcache --enable-opcache \
+    && docker-php-ext-install opcache
 
 RUN docker-php-ext-install zip
 RUN docker-php-ext-install pdo pdo_mysql
