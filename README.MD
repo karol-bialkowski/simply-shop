@@ -5,6 +5,7 @@ This is example shop application, based od Symfony 4.4 version. //TODO
 # Features
   - Run app by one docker command!
   - opcache docker implement and testing php 7.4 preloading
+  - xdebug
 
 # Todo
  - [x] Readme, documentation
