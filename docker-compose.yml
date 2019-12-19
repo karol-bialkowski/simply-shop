@@ -30,6 +30,8 @@ services:
           - .:/home/wwwroot
         depends_on:
           - mysql
+        environment:
+          XDEBUG_CONFIG: remote_host={{192.168.8.100}}
 
     phpmyadmin:
         image: phpmyadmin/phpmyadmin
